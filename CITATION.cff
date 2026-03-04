@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this theoretical framework or the Krylov plateau derivation, please cite it as below."
+authors:
+  - family-names: "Shane"
+    given-names: "Hartley"
+    affiliation: "Project CODE-GEO"
+title: "Krylov-Shortcut: Resolving Tunneling Time via Computational Latency"
+version: 1.0.0
+doi: "10.5281/zenodo.18828511"
+date-released: 2026-03-04
+url: "https://github.com/Darian-Frey/Krylov-Shortcut"
+repository-code: "https://github.com/Darian-Frey/Krylov-Shortcut"
+keywords:
+  - "krylov-complexity"
+  - "hartman-effect"
+  - "quantum-tunneling"
+  - "code-geo"
+  - "quantum-error-correction"
+  - "attoclock"
+abstract: >-
+  This repository provides the formal derivation of the 'Krylov Shortcut,' 
+  identifying the stationarity of spread complexity (the Krylov plateau) 
+  as the physical mechanism for the Hartman Effect. It bridges the 
+  1.8 as tunneling delay in Hydrogen with the 2.816 ms black hole echo 
+  predicted for GW250114 under the CODE-GEO V3.1 framework.
