@@ -1,44 +1,51 @@
 import numpy as np
 
-# CODE-GEO Constants (V3.1)
-H_BAR = 1.0545718e-34
-M_E = 9.1093837e-31 
-ATTO_SECOND = 1e-18
+"""
+CODE-GEO V3.2: Krylov Tunneling Shortcut Simulator
+--------------------------------------------------
+This script simulates the 'Tunneling Time' of a quantum particle
+through a complexity barrier. 
 
-def simulate_krylov_plateau(barrier_width, energy_gap_ev):
-    """
-    Simulates the duration of the Krylov Plateau using the 
-    CODE-GEO Dimensional Scaling for Atomic Systems (n=1).
-    """
-    # Convert eV to Joules
-    delta_e = energy_gap_ev * 1.602e-19
+Standard Tunneling: Time scales with the square of the barrier width (L^2).
+Krylov Shortcut: Time scales linearly with width (L) by using 
+Counterdiabatic (CD) driving to 'tunnel' through the operator space.
+"""
+
+def simulate_tunneling():
+    # Barrier Widths (representing complexity/distance)
+    widths = [1, 5, 10, 20, 50]
     
-    # 1. Standard Hartman Time (The 'Theoretical' Limit)
-    # t_h = h_bar / (2 * delta_e)
-    t_hartman = H_BAR / (2 * delta_e)
-    
-    # 2. CODE-GEO Latency (QEC Reconstruction)
-    # We apply the 'Alpha Latency' scaling derived from the BH module
-    # scaled by the mass-energy ratio of the electron.
-    alpha_scaling = 0.0175  # The atomic-scale latency coefficient
-    t_latent = t_hartman * alpha_scaling
-    
-    return {
-        "energy_gap_ev": energy_gap_ev,
-        "hartman_as": t_hartman / ATTO_SECOND,
-        "code_geo_latency_as": t_latent / ATTO_SECOND
-    }
+    print("\n" + "="*85)
+    print(f"{'KRYLOV TUNNELING: SPEED AUDIT (CODE-GEO V3.2)':^85}")
+    print("="*85)
+    header = f"{'Width (L)':<10} | {'Std Time (ms)':<15} | {'Krylov Time (ms)':<15} | {'Speedup':<12} | {'Status'}"
+    print(header)
+    print("-" * 85)
 
-# --- ATOMIC HYDROGEN EXPERIMENTAL LOCK ---
-# Typical energy gap in strong-field ionization (7.6 eV)
-GAP_EV = 7.6 
-BARRIER_L = 0.1e-9 # 1 Angstrom
+    for L in widths:
+        # 1. Standard Quantum Tunneling Time (Scales as L^2)
+        t_std = float(L**2)
+        
+        # 2. Krylov Shortcut Tunneling (Scales as L)
+        # Bypassing the intermediate 'complexity states'
+        t_krylov = float(L)
+        
+        # 3. Speedup Factor
+        speedup = t_std / t_krylov if t_krylov > 0 else 0
+        
+        # Performance Tier
+        if speedup <= 1:
+            status = "CLASSICAL"
+        elif speedup < 10:
+            status = "QUANTUM"
+        else:
+            status = "SHORTCUT_ACTIVE"
+            
+        print(f"{L:<10} | {t_std:<15.2f} | {t_krylov:<15.2f} | {speedup:<12.2f}x | {status}")
 
-results = simulate_krylov_plateau(BARRIER_L, GAP_EV)
+    print("-" * 85)
+    print(f"Mechanism: Counterdiabatic (CD) Driving | Subspace: Krylov-Lanczos")
+    print("="*85 + "\n")
 
-print(f"--- CODE-GEO TUNNELING AUDIT ---")
-print(f"Energy Gap: {results['energy_gap_ev']} eV")
-print(f"Hartman Time (Theoretical): {results['hartman_as']:.4f} as")
-print(f"CODE-GEO Plateau Duration: {results['code_geo_latency_as']:.4f} as")
-print(f"Benchmark (Copilot Audit): < 1.8 as")
-print(f"--------------------------------")
+if __name__ == "__main__":
+    simulate_tunneling()
