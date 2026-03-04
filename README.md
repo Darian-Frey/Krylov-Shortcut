@@ -24,3 +24,6 @@ Using the **CODE-GEO V3.1** framework, we demonstrate that tunneling is not "tra
 ```bash
 python3 simulations/tunneling_shortcut.py
 ```
+
+## 📚 Citations
+For a full list of the theoretical and empirical sources used in this project, see [LITERATURE_MAP.md](./LITERATURE_MAP.md).
