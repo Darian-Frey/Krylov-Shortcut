@@ -1,0 +1,16 @@
+{
+  "project": "KRYLOV-SHORTCUT",
+  "audit_version": "1.0.3",
+  "timestamp": "2026-03-04",
+  "calibrations": [
+    {
+      "system": "Atomic Hydrogen (H)",
+      "energy_gap_ev": 7.6,
+      "experimental_bound_as": 1.8,
+      "code_geo_prediction_as": 0.7579,
+      "alpha_scaling": 0.0175,
+      "status": "VERIFIED_SUB_RESOLUTION",
+      "notes": "Predicted delay is non-zero but below current experimental resolution. Fits < 1.8 as benchmark."
+    }
+  ]
+}
